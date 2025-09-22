@@ -1,5 +1,9 @@
+import { Hero } from "./components/landing-page/hero";
+
 export default function Home() {
     return (
-        <h1 className="">home</h1>
+        <div className="max-w-7xl mx-auto">
+            <Hero />
+        </div>
     )
 }
