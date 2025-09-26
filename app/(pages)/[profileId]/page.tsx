@@ -2,6 +2,7 @@ import { ProjectCard } from "@/components/commons/project-card";
 import { TotalVisits } from "@/components/commons/total-visits";
 import { UserCard } from "@/components/commons/user-card";
 import { Plus } from "lucide-react";
+import Link from "next/link";
 
 export default async function ProfilePage({ params }: { params: { profileId: string } }) {
     const { profileId } = params;
@@ -12,9 +13,11 @@ export default async function ProfilePage({ params }: { params: { profileId: str
                 <span>
                     Você está usando a versão trial.
                 </span>
-                <button className="text-accent-green font-bold">
-                    Faça o upgrade agora!
-                </button>
+                <Link href={`/${profileId}/upgrade`}>
+                    <button className="text-accent-green font-bold hover:cursor-pointer">
+                        Faça o upgrade agora!
+                    </button>
+                </Link>
             </div>
             <div className="w-1/2 flex justify-center h-min">
                 <UserCard />
@@ -29,7 +32,7 @@ export default async function ProfilePage({ params }: { params: { profileId: str
                 <ProjectCard />
                 <ProjectCard />
                 <ProjectCard />
-                <button className="w-[340px] h-[132px] rounded-[20px] bg-background-secondary flex justify-center items-center gap-2 hover:border border-dashed border-border-secondary">
+                <button className="w-[340px] h-[132px] rounded-[20px] bg-background-secondary flex justify-center items-center gap-2 hover:border border-dashed border-border-secondary hover:cursor-pointer">
                     <Plus className="size-10 text-accent-green" />
                     <span className="text-content-body">
                         Novo projeto
