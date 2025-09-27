@@ -4,8 +4,8 @@ import { UserCard } from "@/components/commons/user-card";
 import { Plus } from "lucide-react";
 import Link from "next/link";
 
-export default async function ProfilePage({ params }: { params: { profileId: string } }) {
-    const { profileId } = params;
+export default async function ProfilePage({ params }: { params: Promise<{ profileId: string }> }) {
+    const { profileId } = await params;
     
     return (
         <div className="relative h-screen flex p-20 overflow-hidden">
