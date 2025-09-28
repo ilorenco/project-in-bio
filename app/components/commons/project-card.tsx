@@ -1,20 +1,20 @@
 "use client"
 
 import { ProjectData } from "@/server/get-profile-data";
+import { formatProjectUrl } from "@/lib/utils";
 import Link from "next/link";
 
 export function ProjectCard({ project, isUserOwner, img }: { project: ProjectData, isUserOwner: boolean, img: string }) {
 
-    const projectUrl = project.projectUrl
-    const formatedProjectUrl = projectUrl.startsWith("http") ? projectUrl : `https://${projectUrl}`
-
+    const projectUrl = formatProjectUrl(project.projectUrl)
+    
     // TODO: Add analytics
     function handleClick() {
         console.log("clicked")
     }
 
     return (
-        <Link href={formatedProjectUrl} target="_blank" onClick={handleClick}>
+        <Link href={projectUrl} target="_blank" onClick={handleClick}>
             <div className="w-[340px] h-[132px] flex gap-5 bg-background-secondary p-3 rounded-[20px] border border-transparent hover:border-border-secondary">
                 <div className="size-24 rounded-md overflow-hidden flex-shrink-0">
                     <img 
