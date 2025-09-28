@@ -5,6 +5,13 @@ export type ProfileData = {
     userId: string
     totalVisits: number
     createdAt: number
+    socialMedias?: {
+        github: string
+        instagram: string
+        linkedin: string
+        twitter: string
+    },
+    updatedAt?: number
 }
 
 export type ProjectData = {
@@ -16,8 +23,6 @@ export type ProjectData = {
     imagePath: string
     createdAt: number
     totalVisits?: number
-    
-
 }
 
 export async function getProfileData(profileId: string) {

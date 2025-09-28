@@ -34,7 +34,7 @@ export default async function ProfilePage({ params }: { params: Promise<{ profil
                 </Link>
             </div>
             <div className="w-1/2 flex justify-center h-min">
-                <UserCard />
+                <UserCard profileData={profileData} />
             </div>
             <div className="w-full flex justify-center content-start gap-4 flex-wrap overflow-y-auto">
                 {projects.map(async (project) => (
@@ -42,7 +42,7 @@ export default async function ProfilePage({ params }: { params: Promise<{ profil
                         project={project}
                         isUserOwner={isUserOwner}
                         key={project.id} 
-                        img={await getDownloadURLFromPath(project.imagePath)}
+                        img={await getDownloadURLFromPath(project.imagePath) || ""}
                     />
                 ))}
                 {isUserOwner && (
