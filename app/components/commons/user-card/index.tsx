@@ -3,8 +3,10 @@
 import { useState } from "react"
 import { Github, Instagram, Linkedin, Plus, Twitter } from "lucide-react"
 import { ProfileData } from "@/server/get-profile-data"
+import { formatProjectUrl } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import EditSocialLinks from "./components/edit-social-links"
+import { AddCustomLink } from "./components/add-custom-link"
 import Link from "next/link"
 
 export function UserCard({
@@ -64,12 +66,24 @@ export function UserCard({
             </div>
             <div className="flex flex-col gap-3 w-full h-[172px]">
                 <div className="w-full flex flex-col items-center gap-3">
-                    <Button className="w-full">Template Saas - Compre Agora</Button>
-                    <button  className="p-3 rounded-xl bg-[#1E1E1E] hover:bg-[#2E2E2E] hover:cursor-pointer">
-                        <Plus />
-                    </button>
+                    {profileData?.link1 && formatProjectUrl(profileData?.link1?.url || "") && (
+                        <Link href={formatProjectUrl(profileData?.link1?.url || "")} target="_blank" className="w-full">
+                            <Button className="w-full">{profileData?.link1?.title}</Button>
+                        </Link>
+                    )}
+                    {profileData?.link2 && formatProjectUrl(profileData?.link2?.url || "") && (
+                        <Link href={formatProjectUrl(profileData?.link2?.url || "")} target="_blank" className="w-full">
+                            <Button className="w-full">{profileData?.link2?.title}</Button>
+                        </Link>
+                    )}
+                    {profileData?.link3 && formatProjectUrl(profileData?.link3?.url || "") && (
+                        <Link href={formatProjectUrl(profileData?.link3?.url || "")} target="_blank" className="w-full">
+                            <Button className="w-full">{profileData?.link3?.title}</Button>
+                        </Link>
+                    )}
                 </div>
             </div>
+            <AddCustomLink profileData={profileData} />
         </div>
     )
 }

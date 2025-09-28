@@ -45,5 +45,6 @@ export const compressImage = (image: File): Promise<File> => {
 }
 
 export function formatProjectUrl(projectUrl: string) {
+    if (!projectUrl || projectUrl.trim() === "") return ""
     return projectUrl.startsWith("http") ? projectUrl : `https://${projectUrl}`
 }
