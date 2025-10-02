@@ -84,7 +84,7 @@ export function NewProject({ profileId }: { profileId: string }) {
                             </div>
                             <button onClick={() => triggerImageInput("imageInput")} className="text-white flex items-center gap-2">
                                 <ArrowUpFromLine className="size-4" />
-                                <span className="text-white font-bold">
+                                <span className="text-white font-bold hover:underline cursor-pointer">
                                     Adicionar imagem
                                 </span>
                             </button>
