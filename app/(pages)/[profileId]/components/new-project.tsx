@@ -9,6 +9,7 @@ import { TextArea } from "@/components/ui/text-area";
 import { compressFiles } from "@/lib/utils";
 import { createProject } from "@/actions/create-project";
 import { useRouter } from "next/navigation";
+import { triggerImageInput } from "@/lib/utils";
 
 export function NewProject({ profileId }: { profileId: string }) {
     const router = useRouter()
@@ -49,10 +50,6 @@ export function NewProject({ profileId }: { profileId: string }) {
 
     }
 
-    function triggerImageInput(id: string) {
-        document.getElementById(id)?.click()
-    }
-
     function handleImageChange(e: React.ChangeEvent<HTMLInputElement>) {
         const file = e.target.files?.[0] ?? null
         setProjectImage(file)
@@ -77,14 +74,14 @@ export function NewProject({ profileId }: { profileId: string }) {
                                 {projectImage ? (
                                     <img src={URL.createObjectURL(projectImage)} className="w-full h-full object-cover object-center" />
                                 ) : (
-                                    <button onClick={() => triggerImageInput("imageInput")} className="w-full h-full">
+                                    <button className="w-full h-full" onClick={() => triggerImageInput("imageInput")}>
                                         100x100 px
                                     </button>
                                 )}
                             </div>
                             <button onClick={() => triggerImageInput("imageInput")} className="text-white flex items-center gap-2">
                                 <ArrowUpFromLine className="size-4" />
-                                <span className="text-white font-bold hover:underline cursor-pointer">
+                                <span className="text-white font-bold hover:underline hover:cursor-pointer">
                                     Adicionar imagem
                                 </span>
                             </button>

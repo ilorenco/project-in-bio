@@ -48,3 +48,7 @@ export function formatProjectUrl(projectUrl: string) {
     if (!projectUrl || projectUrl.trim() === "") return ""
     return projectUrl.startsWith("http") ? projectUrl : `https://${projectUrl}`
 }
+
+export function triggerImageInput(id: string) {
+    document.getElementById(id)?.click()
+}
