@@ -22,23 +22,29 @@ export function UserCard({
     return (
         <div className="w-[348px] flex flex-col gap-5 items-center p-5 border border-white/10 bg-[#121212] rounded-3xl text-white">
             <div className="size-48">
-                <img 
-                    className="rounded-full object-cover w-full h-full"
-                    src="https://github.com/ilorenco.png"
-                    alt="User Card"
-                />
+                {profileData?.imageUrl ? (
+                    <img 
+                        className="rounded-full object-cover w-full h-full"
+                        src={profileData.imageUrl}
+                        alt={profileData?.yourName || ""}
+                    />
+                ) : (
+                    <div className="rounded-full w-full h-full bg-background-tertiary flex items-center justify-center">
+                        <span className="text-white/40 text-sm">Sem foto</span>
+                    </div>
+                )}
             </div>
             <div className="flex flex-col gap-2 w-full">
                 <div className="flex items-center gap-2">
                     <h3 className="text-3xl font-bold min-w-0 overflow-hidden">
-                        Igor Henrique
+                        {profileData?.yourName || ""}
                     </h3>
                     {isUserOwner && (
                         <EditUserCard />
                     )}
                 </div>
                 <p className="opacity-40">
-                    "Eu faço produtos para a Internet"
+                    {profileData?.yourDescription || ""}
                 </p>
             </div>
             <div className="flex flex-col gap-2 w-full">

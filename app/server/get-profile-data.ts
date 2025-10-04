@@ -1,11 +1,15 @@
 import "server-only"
-import { db } from "@/lib/firebase"
+import { db, getDownloadURLFromPath } from "@/lib/firebase"
 import { Link } from "@/actions/add-custom-link"
 
 export type ProfileData = {
     userId: string
     totalVisits: number
     createdAt: number
+    yourName?: string
+    yourDescription?: string
+    imagePath?: string
+    imageUrl?: string
     socialMedias?: {
         github: string
         instagram: string
@@ -31,8 +35,13 @@ export type ProjectData = {
 
 export async function getProfileData(profileId: string) {
     const snapshot = await db.collection("profiles").doc(profileId).get()
+    const data = snapshot.data() as ProfileData
 
-    return snapshot.data() as ProfileData
+    if (data?.imagePath) {
+        data.imageUrl = await getDownloadURLFromPath(data.imagePath) || undefined
+    }
+
+    return data
 }
 
 export async function getProfileProjects(profileId: string) {
