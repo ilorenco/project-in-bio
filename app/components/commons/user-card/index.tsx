@@ -1,19 +1,21 @@
 "use client"
 
 import { useState } from "react"
-import { Github, Instagram, Linkedin, Plus, Twitter } from "lucide-react"
+import { Github, Instagram, Linkedin, Twitter } from "lucide-react"
 import { ProfileData } from "@/server/get-profile-data"
 import { formatProjectUrl } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import EditSocialLinks from "./components/edit-social-links"
 import { AddCustomLink } from "./components/add-custom-link"
+import { EditUserCard } from "./components/edit-user-card"
 import Link from "next/link"
 
 export function UserCard({
     profileData,
-
+    isUserOwner,
 }: {
     profileData?: ProfileData
+    isUserOwner: boolean
 }) {
     const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -31,6 +33,9 @@ export function UserCard({
                     <h3 className="text-3xl font-bold min-w-0 overflow-hidden">
                         Igor Henrique
                     </h3>
+                    {isUserOwner && (
+                        <EditUserCard />
+                    )}
                 </div>
                 <p className="opacity-40">
                     "Eu faço produtos para a Internet"
@@ -61,7 +66,9 @@ export function UserCard({
                             <Twitter />
                         </Link>
                     )}
-                    <EditSocialLinks profileData={profileData} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+                    {isUserOwner && (
+                        <EditSocialLinks profileData={profileData} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+                    )}
                 </div>
             </div>
             <div className="flex flex-col gap-3 w-full h-[172px]">
@@ -83,7 +90,9 @@ export function UserCard({
                     )}
                 </div>
             </div>
-            <AddCustomLink profileData={profileData} />
+            {isUserOwner && (
+                <AddCustomLink profileData={profileData} />
+            )}
         </div>
     )
 }
