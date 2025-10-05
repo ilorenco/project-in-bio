@@ -25,7 +25,7 @@ export async function createProject(formData: FormData) {
     const imagePath = storageRef.name
 
     try {
-        await db.collection("projects").doc(profileId as string).collection("projects").doc().set(
+        await db.collection("profiles").doc(profileId as string).collection("projects").doc().set(
             {
                 userId: session?.user?.id,
                 projectName: projectName,
