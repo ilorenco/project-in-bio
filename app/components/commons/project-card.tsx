@@ -3,14 +3,18 @@
 import { ProjectData } from "@/server/get-profile-data";
 import { formatProjectUrl } from "@/lib/utils";
 import Link from "next/link";
+import { increaseProjectVisits } from "@/actions/increase-project-visits";
+import { useParams } from "next/navigation";
 
 export function ProjectCard({ project, isUserOwner, img }: { project: ProjectData, isUserOwner: boolean, img: string }) {
 
     const projectUrl = formatProjectUrl(project.projectUrl)
+    const { profileId } = useParams()
     
-    // TODO: Add analytics
-    function handleClick() {
-        console.log("clicked")
+    async function handleClick() {
+        if (!profileId || !project.id || isUserOwner) return
+        
+        await increaseProjectVisits(profileId as string, project.id)
     }
 
     return (

@@ -7,7 +7,7 @@ import { getProfileData, getProfileProjects } from "@/server/get-profile-data";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { NewProject } from "./components/new-project";
-
+import { increaseProfileVisits } from "@/actions/increase-profile-visits";
 
 export default async function ProfilePage({ params }: { params: Promise<{ profileId: string }> }) {
     const { profileId } = await params;
@@ -20,6 +20,10 @@ export default async function ProfilePage({ params }: { params: Promise<{ profil
     const session = await auth()
 
     const isUserOwner = profileData.userId === session?.user?.id
+
+    if (!isUserOwner) {
+        await increaseProfileVisits(profileId)
+    }
 
     return (
         <div className="relative h-screen flex p-20 overflow-hidden">
@@ -50,7 +54,9 @@ export default async function ProfilePage({ params }: { params: Promise<{ profil
                 )}
             </div>
             <div className="absolute bottom-4 right-0 left-0 w-min mx-auto">
-                <TotalVisits />
+                {isUserOwner && (
+                    <TotalVisits totalVisits={profileData.totalVisits} />
+                )}
             </div>
         </div>
     )
