@@ -31,10 +31,10 @@ export function Hero() {
                         <TotalVisits />
                     </div>
                     <div className="absolute top-[20%] -left-[45%] -z-10">
-                        <ProjectCard />
+                        <ProjectCard name="Project 1" description="Description 1" img="/project1.jpg" />
                     </div>
                     <div className="absolute -top-[5%] -left-[55%] -z-10">
-                        <ProjectCard />
+                        <ProjectCard name="Project 2" description="Description 2" img="/project2.jpg" />
                     </div>
                 </div>
             </div>

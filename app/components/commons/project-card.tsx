@@ -6,13 +6,13 @@ import Link from "next/link";
 import { increaseProjectVisits } from "@/actions/increase-project-visits";
 import { useParams } from "next/navigation";
 
-export function ProjectCard({ project, isUserOwner, img }: { project: ProjectData, isUserOwner: boolean, img: string }) {
+export function ProjectCard({ project, isUserOwner, img, name, description }: { project?: ProjectData, isUserOwner?: boolean, img?: string, name?: string, description?: string }) {
 
-    const projectUrl = formatProjectUrl(project.projectUrl)
+    const projectUrl = formatProjectUrl(project?.projectUrl || "")
     const { profileId } = useParams()
     
     async function handleClick() {
-        if (!profileId || !project.id || isUserOwner) return
+        if (!profileId || !project?.id || isUserOwner) return
         
         await increaseProjectVisits(profileId as string, project.id)
     }
@@ -29,15 +29,15 @@ export function ProjectCard({ project, isUserOwner, img }: { project: ProjectDat
                 <div className="flex flex-col gap-2">
                     {isUserOwner && (
                         <span className="uppercase text-xs font-bold text-accent-green">
-                            {project.totalVisits || 0} cliques
+                            {project?.totalVisits || 0} cliques
                         </span>
                     )}
                     <div className="flex flex-col">
                         <span className="text-white font-bold text-xl">
-                            {project.projectName}
+                            { name || project?.projectName}
                         </span>
                         <span className="text-content-body text-sm">
-                            {project.projectDescription}
+                            {description || project?.projectDescription}
                         </span>
                     </div>
                 </div>

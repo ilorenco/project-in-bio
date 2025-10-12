@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Github, Instagram, Linkedin, Twitter } from "lucide-react"
+import { Github, Icon, Instagram, Linkedin, Plus, Twitter } from "lucide-react"
 import { ProfileData } from "@/server/get-profile-data"
 import { formatProjectUrl } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -15,9 +15,11 @@ export function UserCard({
     isUserOwner,
 }: {
     profileData?: ProfileData
-    isUserOwner: boolean
+    isUserOwner?: boolean
 }) {
     const [isModalOpen, setIsModalOpen] = useState(false)
+
+    const icons = [Github, Linkedin, Instagram, Twitter, Plus]
 
     return (
         <div className="w-[348px] flex flex-col gap-5 items-center p-5 border border-white/10 bg-[#121212] rounded-3xl text-white">
@@ -72,6 +74,11 @@ export function UserCard({
                             <Twitter />
                         </Link>
                     )}
+                    {!profileData && icons.map((Icon, index) => (
+                        <button key={index} className="p-3 rounded-xl bg-[#1E1E1E] hover:bg-[#2E2E2E] hover:cursor-pointer">
+                            <Icon />
+                        </button>
+                    ))}
                     {isUserOwner && (
                         <EditSocialLinks profileData={profileData} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
                     )}
