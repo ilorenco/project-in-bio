@@ -101,6 +101,11 @@ export function UserCard({
                             <Button className="w-full">{profileData?.link3?.title}</Button>
                         </Link>
                     )}
+                    {!profileData &&  (
+                        <button className="p-3 rounded-xl bg-[#1E1E1E] hover:bg-[#2E2E2E] hover:cursor-pointer">
+                            <Plus />
+                        </button>
+                    )}
                 </div>
             </div>
             {isUserOwner && (
